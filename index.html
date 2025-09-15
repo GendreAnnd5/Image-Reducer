@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Reducer - Compress Images Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showSection('home')">
+                <span>🖼️</span>
+                <span>ImageReducer</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showSection('home')" class="nav-link active">Home</a></li>
+                    <li><a href="#" onclick="showSection('features')" class="nav-link">Features</a></li>
+                    <li><a href="#" onclick="showSection('about')" class="nav-link">About</a></li>
+                    <li><a href="#" onclick="showSection('contact')" class="nav-link">Contact</a></li>
+                    <li><button class="theme-toggle" id="themeToggle">🌙</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <div class="container">
+                <h1>🖼️ Image Reducer</h1>
+                <p class="subtitle">Compress your images without losing quality - Free & Fast!</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Drop your image here</div>
+                    <div class="upload-subtext">or click to browse (JPEG, PNG, WebP, AVIF, SVG supported)</div>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png,image/webp,image/avif,image/svg+xml">
+                </div>
+
+                <div class="controls" id="controls">
+                    <div class="control-group">
+                        <label>Quality: <span class="quality-value" id="qualityValue">80%</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="qualitySlider" class="slider" min="10" max="100" value="80">
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Output Format:</label>
+                        <div class="format-selector">
+                            <div class="format-option active" data-format="jpeg">JPEG</div>
+                            <div class="format-option" data-format="png">PNG</div>
+                            <div class="format-option" data-format="webp">WebP</div>
+                            <div class="format-option" data-format="avif">AVIF</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Processing image...</div>
+                </div>
+
+                <div class="processing" id="processing">
+                    <div class="spinner"></div>
+                    <div>Processing your image...</div>
+                </div>
+
+                <div class="preview-container" id="previewContainer">
+                    <div class="preview-grid">
+                        <div class="preview-item">
+                            <h3>📸 Original</h3>
+                            <img id="originalPreview" alt="Original">
+                            <div class="file-info" id="originalInfo"></div>
+                        </div>
+                        <div class="preview-item">
+                            <h3>✨ Compressed</h3>
+                            <img id="compressedPreview" alt="Compressed">
+                            <div class="file-info" id="compressedInfo"></div>
+                            <div class="compression-note" id="compressionNote" style="display: none;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats" id="stats">
+                        <h3>💾 Space Saved</h3>
+                        <div class="savings" id="savings">0%</div>
+                    </div>
+                </div>
+
+                <button class="download-btn" id="downloadBtn">⬇️ Download Compressed Image</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features" class="section">
+            <div class="section-content">
+                <h1>✨ Powerful Features</h1>
+                <p class="subtitle">Everything you need for professional image compression</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Lightning Fast</h3>
+                        <p>Compress images in seconds with our optimized algorithms. No waiting, no delays - just instant results that save you time and bandwidth.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Quality Control</h3>
+                        <p>Fine-tune compression levels from 10% to 100% quality. Our smart compression maintains visual quality while significantly reducing file sizes.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Multiple Formats</h3>
+                        <p>Support for JPEG, PNG, WebP, AVIF, and SVG formats. Convert between formats while compressing for maximum compatibility and optimization.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📂</div>
+                        <h3>Drag & Drop</h3>
+                        <p>Simply drag your images into the browser or click to browse. Intuitive interface that works seamlessly across all devices and browsers.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% Private</h3>
+                        <p>All processing happens in your browser. Your images never leave your device, ensuring complete privacy and security of your files.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Completely Free</h3>
+                        <p>No hidden fees, no subscriptions, no limits. Compress unlimited images without any restrictions or watermarks on your compressed files.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Real-time Preview</h3>
+                        <p>See before and after comparisons instantly. Visual feedback shows exactly how your compressed image will look before downloading.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Web Optimized</h3>
+                        <p>Perfect for websites, blogs, and social media. Reduce loading times and improve SEO with properly compressed images.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about" class="section">
+            <div class="section-content">
+                <h1>🎯 About ImageReducer</h1>
+                <p class="subtitle">Professional image compression made simple and accessible</p>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Our Mission</h2>
+                        <p>At ImageReducer, we believe that everyone should have access to professional-grade image compression tools without the complexity or cost. Our mission is to provide a fast, reliable, and completely free solution for optimizing images.</p>
+                        
+                        <h2>Why Image Compression Matters</h2>
+                        <p>Large image files slow down websites, consume storage space, and waste bandwidth. Our tool helps you maintain visual quality while dramatically reducing file sizes, leading to faster websites, better user experiences, and significant cost savings.</p>
+                        
+                        <h2>Technology Behind the Magic</h2>
+                        <p>We use advanced compression algorithms that analyze each image to find the optimal balance between file size and quality. All processing happens directly in your browser using cutting-edge web technologies, ensuring your privacy and security.</p>
+                    </div>
+                    
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">1M+</div>
+                            <div class="stat-label">Images Compressed</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-number">85%</div>
+                            <div class="stat-label">Average Size Reduction</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-number">50TB+</div>
+                            <div class="stat-label">Storage Saved</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Free Forever</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px; padding: 30px; background: rgba(102, 126, 234, 0.1); border-radius: 15px; text-align: center;">
+                    <h3>🌟 Join thousands of satisfied users</h3>
+                    <p>From bloggers to web developers, from photographers to social media managers - ImageReducer is trusted by professionals worldwide for reliable image compression.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact" class="section">
+            <div class="section-content">
+                <h1>📞 Get In Touch</h1>
+                <p class="subtitle">Have questions? Need support? We're here to help!</p>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h2>Contact Information</h2>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email Support</h4>
+                                <p>support@imagereducer.com<br>
+                                Response within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">💬</div>
+                            <div>
+                                <h4>Live Chat</h4>
+                                <p>Available Mon-Fri, 9 AM - 6 PM EST<br>
+                                Instant support for urgent issues</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📚</div>
+                            <div>
+                                <h4>Documentation</h4>
+                                <p>Comprehensive guides and tutorials<br>
+                                help.imagereducer.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🐛</div>
+                            <div>
+                                <h4>Bug Reports</h4>
+                                <p>Found an issue? Let us know!<br>
+                                bugs@imagereducer.com</p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px;">
+                            <h3>Follow Us</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link">📘</a>
+                                <a href="#" class="social-link">🐦</a>
+                                <a href="#" class="social-link">📷</a>
+                                <a href="#" class="social-link">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h2>Send us a message</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px; padding: 20px; background: rgba(76, 175, 80, 0.1); border-radius: 15px; text-align: center;">
+                    <h3>💡 Suggestion Box</h3>
+                    <p>Have ideas for new features? Want to see specific improvements? We love hearing from our users and regularly implement community suggestions!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🖼️ ImageReducer</h3>
+                <p>The fastest and most reliable image compression tool. Reduce file sizes while maintaining quality for web, social media, and storage optimization.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">💼</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Features</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('features')">Drag & Drop Upload</a></li>
+                    <li><a href="#" onclick="showSection('features')">Multiple Formats Support</a></li>
+                    <li><a href="#" onclick="showSection('features')">Quality Control</a></li>
+                    <li><a href="#" onclick="showSection('features')">Batch Processing</a></li>
+                    <li><a href="#" onclick="showSection('features')">Mobile Friendly</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('contact')">Help Center</a></li>
+                    <li><a href="#" onclick="showSection('about')">Tutorials</a></li>
+                    <li><a href="#" onclick="showSection('contact')">FAQ</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Report Bug</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ImageReducer. All rights reserved. | Made with ❤️ for better web performance</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
